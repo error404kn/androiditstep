@@ -2,4 +2,16 @@
     <string name="app_name">My Application</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose">Choose Languange</string>
+    <string name="profile_en">Profile</string>
+    <string name="profile_ka">პროფილი</string>
+    <string name="edit_profile_en">Edit Profile</string>
+    <string name="edit_profile_ka">პროფილის შეცვლა</string>
+    <string name="change_languange_en">Languange</string>
+    <string name="change_languange_ka">ენის შეცვლა</string>
+    <string name="logout_en">Logout</string>
+    <string name="logout_ka">გამოსვლა</string>
+
+
+
 </resources>
