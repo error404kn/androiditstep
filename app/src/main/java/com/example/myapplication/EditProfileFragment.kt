@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentEditProfileBinding
+import kotlinx.coroutines.runBlocking
 
 class EditProfileFragment : Fragment() {
 
@@ -15,6 +16,8 @@ class EditProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ProfileViewModel by activityViewModels()
+
+    private lateinit var myDataStore: MyDataStore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,14 +30,20 @@ class EditProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        myDataStore = MyDataStore(requireContext())
         init()
     }
 
     private fun init(){
         binding.nameET.setText(viewModel.name)
         binding.updateBtn.setOnClickListener{
-            viewModel.name = binding.nameET.text.toString()
-            navigate()
+//            viewModel.name = binding.nameET.text.toString()
+//            navigate()
+            runBlocking {
+                myDataStore.saveData("name", binding.nameET.text.toString())
+            }
+
+            binding.nameET.text = null
         }
         binding.back.setOnClickListener{
             navigate()

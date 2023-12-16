@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentProfileBinding
+import kotlinx.coroutines.runBlocking
 import org.intellij.lang.annotations.Language
 import java.util.Locale
 import kotlin.math.log
@@ -24,6 +25,8 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ProfileViewModel by activityViewModels()
+
+    private lateinit var myDataStore: MyDataStore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +40,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAutoComplete()
+        myDataStore = MyDataStore(requireContext())
         init()
     }
 
@@ -94,7 +98,11 @@ class ProfileFragment : Fragment() {
 
 
     private fun init(){
-        binding.name.text = viewModel.name
+//        binding.name.text = viewModel.name
+
+        runBlocking {
+            binding.name.text = myDataStore.getData("name")
+        }
 
         binding.editProfileLL.setOnClickListener{
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment8)
